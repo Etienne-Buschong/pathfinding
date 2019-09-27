@@ -1,0 +1,55 @@
+/*  $color1: rgba(61, 90, 128, 1);
+    $color2: rgba(152, 193, 217, 1);
+    $color3: rgba(224, 251, 252, 1);
+    $color4: rgba(238, 108, 77, 1);
+    $color5: rgba(41, 50, 65, 1);
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    background-color:darkslategray;
+    height: 100px;
+    padding: 0 20px;
+    color: white;
+    border-bottom: whitesmoke 2px solid;
+}
+
+.header .header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header .header-right {
+    margin-left: auto;
+}
+
+.header__node-container {
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.header__node-container_selected {
+    background-color: whitesmoke;
+    color: darkslategray;
+}
+
+.content {
+    height: calc(100vh - 100px);
+    width: 100%;
+    overflow: hidden;
+    background-color: darkslategray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#canvas {
+}
