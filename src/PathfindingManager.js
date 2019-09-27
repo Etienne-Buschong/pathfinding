@@ -6,14 +6,14 @@ const { NodeType } = require('./Node');
 const AStar = require('./AStar');
 const { manhattanDistance } = require('./heuristics');
 
-class Pathfinding {
+class PathfindingManager {
 
     constructor() {
         this.container = document.getElementById('canvas');
         this.grid = new Grid();
         this.gridView = new GridView(this.grid);
         this.gridInputController = new GridInputController(this.container);
-        this.userInputController = new SettingsInputController();
+        this.settingsInputController = new SettingsInputController();
         this.path = null;
     }
 
@@ -24,33 +24,35 @@ class Pathfinding {
 
     update() {
         if (this.gridInputController.hoverPosition) {
-            this.gridView.markForRedraw = true;
             const x = this.gridInputController.hoverPosition.x;
             const y = this.gridInputController.hoverPosition.y;
-            const pos = this.gridView.coordsToGridPosition(x, y);
-            this.grid.focusNode(pos.x, pos.y);
+            this.gridView.setFocusedNode(x, y);
             if (this.gridInputController.mouseDown) {
-                const selectionType = this.userInputController.currentSelectionMode.value;
+                const selectionType = this.settingsInputController.currentModeSelection.value;
                 const nodeType = this.selectionTypeToNodeType(selectionType);
+                const pos = this.gridView.coordsToGridPosition(x, y);
                 this.grid.setNodeType(pos.x, pos.y, nodeType);
             }
         } else {
-            this.gridView.markForRedraw = true;
-            this.grid.unfocusNode();
+            this.gridView.clearFocusedNode();
         }
-        if (this.userInputController.startPathfinding) {
+        if (this.settingsInputController.startPathfinding) {
             const astar = new AStar(this.grid, manhattanDistance);
-            this.path = astar.astar();
-            this.userInputController.startPathfinding = false;
+            const result = astar.astar();
+            this.path = result.solution;
+            this.settingsInputController.startPathfinding = false;
         }
-
     }
 
     draw() {
-        this.gridView.draw(this.selectionTypeToNodeColor(this.userInputController.currentSelectionMode.value));
+        this.gridView.clearCanvas('whitesmoke');
+        this.gridView.drawNodes();
+        this.gridView.drawFocusedNode(
+            this.selectionTypeToNodeColor(this.settingsInputController.currentModeSelection.value));
         if (this.path) {
-            this.gridView.highlightWalkingPath(this.path);
+            this.gridView.drawWalkingPath(this.path);
         }
+        this.gridView.markDirty = false;
     }
 
     invalidatePath() {
@@ -85,4 +87,4 @@ class Pathfinding {
 
 }
 
-module.exports = Pathfinding;
+module.exports = PathfindingManager;

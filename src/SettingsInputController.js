@@ -9,14 +9,13 @@ class SettingsInputController {
 
     constructor() {
         this.controlContainer = document.getElementsByClassName('header-left')[0];
-        this.bindKnobs();
-        this.currentSelectionMode = null;
+        this.bindModeButtons();
+        this.currentModeSelection = null;
         this.selectInputMode(SelectionType.START);
         this.setupKeybindings();
-        this.startPathfinding = false;
     }
 
-    bindKnobs() {
+    bindModeButtons() {
         this.modeKnobs = {};
         Array.from(this.controlContainer.children).forEach(child => {
             this.modeKnobs[child.getAttribute('type')] = child;
@@ -46,11 +45,11 @@ class SettingsInputController {
     }
 
     selectInputMode(selectionType) {
-        if (this.currentSelectionMode) {
-            this.currentSelectionMode.element.classList.remove('header__node-container_selected');
+        if (this.currentModeSelection) {
+            this.currentModeSelection.element.classList.remove('header__node-container_selected');
         }
-        this.currentSelectionMode = { value: SelectionType[selectionType], element: this.modeKnobs[selectionType] };
-        this.currentSelectionMode.element.classList.add('header__node-container_selected');
+        this.currentModeSelection = { value: SelectionType[selectionType], element: this.modeKnobs[selectionType] };
+        this.currentModeSelection.element.classList.add('header__node-container_selected');
     }
 }
 

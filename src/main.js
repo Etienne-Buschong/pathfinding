@@ -1,7 +1,7 @@
-const Pathfinding = require('./Pathfinding');
-const pathfinding = new Pathfinding();
+const PathfindingManager = require('./PathfindingManager');
+const pathfindingManager = new PathfindingManager();
 requestAnimationFrame(loop);
 function loop() {
-    pathfinding.loop();
+    pathfindingManager.loop();
     requestAnimationFrame(loop);
 }
