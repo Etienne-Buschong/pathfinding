@@ -1,4 +1,4 @@
-const NaivePrioritySet = require('./NaivePrioritySet');
+const NaivePrioritySet = require('../ds/NaivePrioritySet');
 
 function cmpByFValue(a, b) {
     return a.fScore > b.fScore ? 1: a.fScore === b.fScore ? 0: -1;
@@ -37,7 +37,7 @@ class AStar {
         return completePath;
     }
 
-    astar() {
+    async astar() {
         if (!this.start || !this.target) {
             throw new Error('Start or target is missing!');
         }

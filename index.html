@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Pathfinding</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div class="header">
-            <div class="header-left">
-                <div type="TARGET" class="header__node-container">
-                    Target Node (T)
-                </div>
-                <div type="START" class="header__node-container">
-                    Start Node (S)
-                </div>
-                <div type="WALL" class="header__node-container">
-                    Wall Node (W)
-                </div>
-                <div type="REMOVE" class="header__node-container">
-                    Reset Node (R)
-                </div>
-            </div>
-            <div class="header-right">
-                Pathfinding Demo
-            </div>
-        </div>
-        <div class="content">
-            <canvas id="canvas"></canvas>
-        </div>
-    </body>
-    <script src="static/bundle.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pathfinding</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <header class="navigation">
+        <section class="section header">
+            <span class="back-button"> &#x2190; </span>
+            <h1 class="heading-1">Pathfinding Editor</h1>
+        </section>
+        <section class="section editor-input">
+            <h2 class="heading-2">Editor Control</h2>
+            <label for="input-type-selection">Input Type</label>
+            <select name="input-type-selection" id="input-type-selection">
+                <option value="TARGET">Target Node</option>
+                <option value="START">Start Node</option>
+                <option value="WALL">Wall Node</option>
+                <option value="REMOVE">Remove</option>
+            </select>
+        </section>
+        <section class="section algorithm-selection">
+            <label for="algorithm-selection">Algorithm</label>
+            <select name="algorithm-selection" id="algorithm-selection">
+                <option value="astar">A*</option>
+                <option value="djikstra">Djikstra</option>
+                <option value="bfs">BFS</option>
+            </select>
+        </section>
+        <section class="section algorithm-execution">
+            <button class="button" id="clear-input-button">Clear Input</button>
+            <button class="button" id="generate-map-button">Generate Map</button>
+            <button class="button" id="run-algorithm-button">Run Algorithm</button>
+        </section>
+    </header>
+    <div class="content">
+        <canvas id="canvas"></canvas>
+    </div>
+</div>
+
+</body>
+<script src="static/bundle.js"></script>
 </html>

@@ -5,6 +5,8 @@ class Grid {
     constructor() {
         this.startNode = null;
         this.targetNode = null;
+        this.path = null;
+        this.hoveredNode = null;
         // in px
         this.nodeSize = 15;
         // count of elements
@@ -55,8 +57,8 @@ class Grid {
         return this.nodes[y * this.rowSize + x];
     }
 
-    setNodeType(x, y, type) {
-        const foundNode = this.getNode(x, y);
+    setNodeType(gridX, gridY, type) {
+        const foundNode = this.getNode(gridX, gridY);
         foundNode.nodeType = type;
 
         // special cases start and target since we need to potentially remove other starts, subject to change
